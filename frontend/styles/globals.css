@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: inter, sans-serif;
+    background:var(--background);
+    color: var(--text);
+    transition: var(--transition);
+    overflow-x:hidden;
+}

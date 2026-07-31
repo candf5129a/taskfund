@@ -1,0 +1,85 @@
+.platform-stats{
+
+padding:100px 20px;
+
+background:var(--surface-alt);
+
+}
+
+.section-title{
+
+text-align:center;
+
+max-width:650px;
+
+margin:auto auto 60px;
+
+}
+
+.section-title span{
+
+color:var(--primary);
+
+font-weight:700;
+
+}
+
+.section-title h2{
+
+font-size:2.5rem;
+
+margin:15px 0;
+
+}
+
+.section-title p{
+
+line-height:1.7;
+
+}
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:24px;
+
+}
+
+.stats-card{
+
+background:var(--surface);
+
+padding:35px;
+
+border-radius:18px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.stats-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.stats-card h3{
+
+font-size:2.2rem;
+
+color:var(--primary);
+
+margin-bottom:10px;
+
+}
+
+.stats-card p{
+
+font-weight:500;
+
+}

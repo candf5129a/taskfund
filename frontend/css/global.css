@@ -1,0 +1,75 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+body{
+
+    font-family:"Inter",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    transition:var(--transition);
+
+    overflow-x:hidden;
+
+}
+
+.container{
+
+    width:min(92%,var(--container));
+
+    margin:auto;
+
+}
+
+section{
+
+    padding:100px 0;
+
+}
+
+h1,h2,h3,h4{
+
+    font-family:"Poppins",sans-serif;
+
+    line-height:1.2;
+
+}
+
+h1{
+
+    font-size:clamp(2.6rem,5vw,4.8rem);
+
+}
+
+h2{
+
+    font-size:clamp(2rem,4vw,3.2rem);
+
+}
+
+p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:1rem;
+
+}
+
+body::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+body::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:50px;
+
+}

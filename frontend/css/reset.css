@@ -1,0 +1,49 @@
+/* ===========================
+   RESET
+=========================== */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    border:none;
+    outline:none;
+    cursor:pointer;
+    background:none;
+    font:inherit;
+}
+
+input,
+textarea,
+select{
+    font:inherit;
+    outline:none;
+    border:none;
+}
+
+ul{
+    list-style:none;
+}
