@@ -13,6 +13,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
+    <!-- IMPORT ICON FONT SUPPORT -->
+    <!-- Font Awesome Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -20,8 +25,35 @@
 
 <body>
 
-    <header>
 <header class="header">
+
+
+    <div class="mobile-menu">
+
+    <button class="close-menu">
+    <i class="fa-solid fa-xmark"></i>
+</button>
+    <nav class="mobile-nav">
+
+        <a href="#">Home</a>
+        <a href="#">Tasks</a>
+        <a href="#">Services</a>
+        <a href="#">Advertise</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
+
+        <a href="#" class="mobile-login">
+            Login
+        </a>
+
+        <a href="#" class="mobile-signup">
+            Get Started
+        </a>
+
+    </nav>
+
+</div> 
+    
     <div class="container navbar">
 
         <!-- Logo -->
@@ -43,24 +75,28 @@
 
             <div class="nav-actions">
 
-                <button class="theme-toggle">
-                    🌙
-                </button>
+    <button class="theme-toggle">
+        🌙
+    </button>
 
-                <a href="#" class="login-btn">
-                    Login
-                </a>
+    <a href="#" class="login-btn">
+        Login
+    </a>
 
-                <a href="#" class="signup-btn">
-                    Get Started
-                </a>
+    <a href="#" class="signup-btn">
+        Get Started
+    </a>
 
+    <!-- Mobile Menu Button -->
+    <button class="menu-btn">
+        <i class="fa-solid fa-bars"></i>
+    </button>
             </div>
-
         </div>
-
     </div>
 </header>
+
+
 <section class="hero">
 
     <div class="container hero-container">
@@ -113,23 +149,512 @@
             </div>
 
         </div>
+<div class="hero-image">
 
-        <div class="hero-image">
+    <div class="hero-circle"></div>
 
-            <!-- Image will go here in the next step -->
+    <div class="money-container">
+    <img src="assets/images/money.png" class="falling-money money1">
+    <img src="assets/images/money.png" class="falling-money money2">
+    <img src="assets/images/money.png" class="falling-money money3">
+    <img src="assets/images/money.png" class="falling-money money4">
+    <img src="assets/images/money.png" class="falling-money money5">
+    <img src="assets/images/money.png" class="falling-money money6">
+    <img src="assets/images/money.png" class="falling-money money7">
+    <img src="assets/images/money.png" class="falling-money money8">
+    </div>
+    
+    <img
+        src="assets/images/hero-model.png"
+        alt="TaskFunds Model"
+        class="hero-model"
+    >
+    <!-- Floating Elements -->
+    <div class="floating-card card-1">
+        💰 Earn Daily
+    </div>
+
+    <div class="floating-card card-2">
+        ✅ Task Completed
+    </div>
+
+    <div class="floating-card card-3">
+        ₦5,000 Paid
+    </div>
+
+</div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-bg"></div>
+
+    <div class="container">
+
+        <div class="section-title">
+    <span>WHY CHOOSE TASKFUNDS</span>
+    <h2>Everything You Need In One Platform</h2>
+    <p>
+        Earn money, promote your business and connect with thousands of trusted users.
+    </p>
+</div>
+        <div class="features-grid">
+            <!-- CARD 1 -->
+            <div class="feature-card">
+                
+        <div class="feature-icon">💰</div>
+
+        <h3>Earn Money</h3>
+
+        <p>
+            Complete verified tasks and receive secure payments instantly.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
+            <!-- CARD 2 -->
+            <div class="feature-card">
+                
+        <div class="feature-icon">📢</div>
+
+        <h3>Advertise</h3>
+
+        <p>
+            Reach thousands of users and grow your business with targeted campaigns.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
+            <!-- CARD 3 -->
+            <div class="feature-card">
+            
+        <div class="feature-icon">⚡</div>
+
+        <h3>Fast Payments</h3>
+
+        <p>
+            Withdraw your earnings quickly without unnecessary delays.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
+            <!-- CARD 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+
+        <h3>Trusted Platform</h3>
+
+        <p>
+            Verified advertisers and protected transactions for everyone.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
+            <!-- CARD 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+
+        <h3>Analytics</h3>
+
+        <p>
+            Monitor campaign performance using powerful statistics.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
+            <!-- CARD 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+
+        <h3>Community</h3>
+
+        <p>
+            Join thousands of workers and businesses already earning every day.
+        </p>
+
+        <a href="#" class="feature-link">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+            </div>
 
         </div>
 
     </div>
 
 </section>
-    </header>
 
+<!-- ==========================
+     HOW IT WORKS
+========================== -->
+
+<section class="how-it-works">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>HOW IT WORKS</span>
+
+            <h2>Start Earning In Four Simple Steps</h2>
+
+            <p>
+                Whether you're looking to earn money or advertise your business,
+                TaskFunds makes the entire process simple, secure and fast.
+            </p>
+
+        </div>
+
+        <div class="steps">
+
+            <!-- Step 1 -->
+            <div class="step-card">
+
+                <div class="step-number">01</div>
+
+                <div class="step-icon">👤</div>
+
+                <h3>Create Account</h3>
+
+                <p>
+                    Sign up as a Worker or Advertiser in less than two minutes.
+                </p>
+
+            </div>
+
+            <!-- Arrow -->
+            <div class="step-arrow">
+                →
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+
+                <div class="step-number">02</div>
+
+                <div class="step-icon">🛡️</div>
+
+                <h3>Verify Profile</h3>
+
+                <p>
+                    Verify your account to unlock secure payments and trusted jobs.
+                </p>
+
+            </div>
+
+            <!-- Arrow -->
+            <div class="step-arrow">
+                →
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+
+                <div class="step-number">03</div>
+
+                <div class="step-icon">📋</div>
+
+                <h3>Complete Tasks</h3>
+
+                <p>
+                    Complete social, survey and business tasks from verified advertisers.
+                </p>
+
+            </div>
+
+            <!-- Arrow -->
+            <div class="step-arrow">
+                →
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+
+                <div class="step-number">04</div>
+
+                <div class="step-icon">💸</div>
+
+                <h3>Withdraw Earnings</h3>
+
+                <p>
+                    Receive your money quickly through your preferred payment method.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     TESTIMONIALS
+========================== -->
+
+<section class="testimonials">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>WHAT PEOPLE SAY</span>
+
+            <h2>Trusted By Workers And Businesses</h2>
+
+            <p>
+                See how people are using TaskFunds to earn money,
+                grow their businesses and complete tasks.
+            </p>
+
+        </div>
+
+        <div class="testimonials-grid">
+
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+
+                <div class="testimonial-top">
+
+                    <div class="testimonial-avatar">
+                        👨🏾
+                    </div>
+
+                    <div>
+                        <h3>David Okafor</h3>
+                        <span>Task Worker</span>
+                    </div>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "TaskFunds makes it easy to find simple tasks
+                    and earn extra money. I really like how clear
+                    the task instructions are."
+                </p>
+
+            </div>
+
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+
+                <div class="testimonial-top">
+
+                    <div class="testimonial-avatar">
+                        👩🏾
+                    </div>
+
+                    <div>
+                        <h3>Amaka Johnson</h3>
+                        <span>Business Owner</span>
+                    </div>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "I needed a simple way to promote my business
+                    and reach more people. TaskFunds gives me a
+                    much better way to connect with potential customers."
+                </p>
+
+            </div>
+
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+
+                <div class="testimonial-top">
+
+                    <div class="testimonial-avatar">
+                        👨🏾‍💻
+                    </div>
+
+                    <div>
+                        <h3>Michael Adeyemi</h3>
+                        <span>Task Worker</span>
+                    </div>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "The platform is straightforward. I can browse
+                    available tasks, complete them and keep track
+                    of my earnings."
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     CTA SECTION
+========================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-content">
+
+            <span class="cta-tag">
+                🚀 START TODAY
+            </span>
+
+            <h2>
+                Ready to Start Earning?
+            </h2>
+
+            <p>
+                Join thousands of workers and businesses using TaskFunds
+                to earn money, complete tasks and grow their businesses.
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="#" class="primary-btn">
+                    Start Earning
+                </a>
+
+                <a href="#" class="secondary-btn">
+                    Create Campaign
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
     <main></main>
 
-    <footer></footer>
+    <footer class="footer">
 
-    <script src="js/main.js"></script>
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+
+                <a href="#" class="footer-logo">
+                    <span>Task</span>Funds
+                </a>
+
+                <p>
+                    Complete tasks, earn money, grow your business.
+                    TaskFunds connects workers and businesses on one
+                    trusted marketplace.
+                </p>
+
+                <div class="footer-socials">
+
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="Instagram">◎</a>
+                    <a href="#" aria-label="TikTok">♪</a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Platform -->
+            <div class="footer-column">
+
+                <h3>Platform</h3>
+
+                <a href="#">Home</a>
+                <a href="#">Tasks</a>
+                <a href="#">Services</a>
+                <a href="#">Advertise</a>
+                <a href="#">Pricing</a>
+
+            </div>
+
+
+            <!-- Company -->
+            <div class="footer-column">
+
+                <h3>Company</h3>
+
+                <a href="#">About Us</a>
+                <a href="#">How It Works</a>
+                <a href="#">Contact</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+
+            </div>
+
+
+            <!-- Support -->
+            <div class="footer-column">
+
+                <h3>Support</h3>
+
+                <a href="#">Help Center</a>
+                <a href="#">Safety</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">FAQs</a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom -->
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 TaskFunds. All rights reserved.
+            </p>
+
+            <p>
+                Built for workers & businesses.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
     <script src="js/theme.js"></script>
     <script src="js/navbar.js"></script>
 
