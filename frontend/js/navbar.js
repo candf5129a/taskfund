@@ -6,14 +6,14 @@ console.log(menuBtn);
 console.log(closeBtn);
 console.log(mobileMenu);
 
-menuBtn.addEventListener("click", () => {
+if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("active");
+    });
+}
 
-    mobileMenu.classList.add("active");
-
-});
-
-closeBtn.addEventListener("click", () => {
-
-    mobileMenu.classList.remove("active");
-
-});
+if (closeBtn && mobileMenu) {
+    closeBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+    });
+}
