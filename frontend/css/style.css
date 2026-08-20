@@ -1627,14 +1627,7 @@ transform:translateY(-18px);
     position: relative;
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            135deg,
-            purple 0%,
-            #aa04f1 45%,
-            rgb(151, 62, 198) 60%,
-            purple 100%
-        );
+    background: rgba(8, 68, 158, 0.053);
 }
 
 .auth-page::before {
