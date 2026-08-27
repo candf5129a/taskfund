@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"golang.org/x/crypto/bcrypt"
 
 	"taskfund/backend/internal/auth"
 	"taskfund/backend/internal/models"
+	"taskfund/backend/internal/verification"
 )
 
 type RegisterRequest struct {
@@ -58,6 +60,7 @@ func Register(db *pgxpool.Pool) http.HandlerFunc {
 			return
 		}
 
+		// Hash password
 		passwordHash, err := bcrypt.GenerateFromPassword(
 			[]byte(request.Password),
 			bcrypt.DefaultCost,
@@ -71,21 +74,44 @@ func Register(db *pgxpool.Pool) http.HandlerFunc {
 			return
 		}
 
+		// Generate email verification token
+		verificationToken, err := verification.GenerateToken()
+
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]interface{}{
+				"success": false,
+				"message": "Failed to generate verification token.",
+			})
+			return
+		}
+
+		// Token expires after 24 hours
+		verificationExpiresAt := time.Now().Add(24 * time.Hour)
+
 		var userID int64
 
 		err = db.QueryRow(
 			context.Background(),
 			`
 			INSERT INTO users
-				(first_name, last_name, email, password_hash)
+				(
+					first_name,
+					last_name,
+					email,
+					password_hash,
+					email_verification_token,
+					email_verification_expires_at
+				)
 			VALUES
-				($1, $2, $3, $4)
+				($1, $2, $3, $4, $5, $6)
 			RETURNING id
 			`,
 			request.FirstName,
 			request.LastName,
 			request.Email,
 			string(passwordHash),
+			verificationToken,
+			verificationExpiresAt,
 		).Scan(&userID)
 
 		if err != nil {
@@ -96,12 +122,16 @@ func Register(db *pgxpool.Pool) http.HandlerFunc {
 			return
 		}
 
+		// Temporary development response.
+		// We will remove the token from the response
+		// when email sending is implemented.
 		writeJSON(w, http.StatusCreated, map[string]interface{}{
 			"success": true,
 			"message": "Registration successful.",
 			"data": map[string]interface{}{
-				"id":    userID,
-				"email": request.Email,
+				"id":                 userID,
+				"email":              request.Email,
+				"verification_token": verificationToken,
 			},
 		})
 	}
@@ -149,7 +179,12 @@ func Login(db *pgxpool.Pool) http.HandlerFunc {
 		err = db.QueryRow(
 			context.Background(),
 			`
-			SELECT id, first_name, last_name, email, password_hash
+			SELECT
+				id,
+				first_name,
+				last_name,
+				email,
+				password_hash
 			FROM users
 			WHERE email = $1
 			`,

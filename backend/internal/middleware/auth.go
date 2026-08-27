@@ -54,12 +54,21 @@ func Auth(next http.Handler) http.Handler {
 			return
 		}
 
-		userID, ok := claims["user_id"]
+		userIDValue, ok := claims["user_id"]
 
 		if !ok {
 			http.Error(w, `{"success":false,"message":"User ID missing from token."}`, http.StatusUnauthorized)
 			return
 		}
+
+		userIDFloat, ok := userIDValue.(float64)
+
+		if !ok {
+			http.Error(w, `{"success":false,"message":"Invalid user ID in token."}`, http.StatusUnauthorized)
+			return
+		}
+
+		userID := int64(userIDFloat)
 
 		ctx := context.WithValue(
 			r.Context(),

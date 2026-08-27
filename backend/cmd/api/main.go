@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"taskfund/backend/internal/database"
 	"taskfund/backend/internal/handlers"
@@ -33,7 +34,9 @@ func main() {
 	})
 
 	mux.HandleFunc("/api/v1/auth/register", handlers.Register(db))
+	mux.HandleFunc("/api/v1/auth/verify-email", handlers.VerifyEmail(db))
 	mux.Handle("/api/v1/auth/login", handlers.Login(db))
+	// mux.HandleFunc("/api/v1/tasks", handlers.GetTasks(db))
 
 	mux.Handle(
 		"/api/v1/profile",
@@ -54,9 +57,63 @@ func main() {
 		})),
 	)
 
+	mux.Handle(
+		"/api/v1/tasks/",
+		middleware.Auth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+			if strings.HasSuffix(r.URL.Path, "/accept") {
+				handlers.AcceptTask(db).ServeHTTP(w, r)
+				return
+			}
+
+			if strings.HasSuffix(r.URL.Path, "/submit") {
+				handlers.SubmitTask(db).ServeHTTP(w, r)
+				return
+			}
+
+			http.NotFound(w, r)
+		})),
+	)
+
+	mux.Handle(
+		"/api/v1/admin/submissions/",
+		middleware.Auth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+			if strings.HasSuffix(r.URL.Path, "/approve") {
+				handlers.ApproveSubmission(db).ServeHTTP(w, r)
+				return
+			}
+
+			http.NotFound(w, r)
+		})),
+	)
+
+	mux.Handle(
+		"/api/v1/tasks",
+		handlers.Tasks(db),
+	)
+
+	mux.Handle(
+		"/api/v1/admin/submissions",
+		middleware.Auth(handlers.AdminSubmissions(db)),
+	)
+
+	mux.Handle(
+		"/api/v1/wallet",
+		middleware.Auth(handlers.Wallet(db)),
+	)
+
+	mux.Handle(
+		"/api/v1/wallet/transactions",
+		middleware.Auth(handlers.WalletTransactions(db)),
+	)
+	// server := &http.Server{
+	// 	Addr:    ":8080",
+	// 	Handler: mux,
+	// }
 	server := &http.Server{
 		Addr:    ":8080",
-		Handler: mux,
+		Handler: middleware.CORS(mux),
 	}
 
 	log.Println("TaskFunds API running on http://localhost:8080")
