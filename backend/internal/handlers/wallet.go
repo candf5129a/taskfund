@@ -32,19 +32,27 @@ func Wallet(db *pgxpool.Pool) http.HandlerFunc {
 		}
 
 		var (
-			walletID int64
-			balance  float64
+			walletID       int64
+			balance        float64
+			pendingBalance float64
 		)
 
 		err := db.QueryRow(
 			context.Background(),
 			`
-			SELECT id, balance
+			SELECT
+				id,
+				balance,
+				pending_balance
 			FROM wallets
 			WHERE user_id = $1
 			`,
 			userID,
-		).Scan(&walletID, &balance)
+		).Scan(
+			&walletID,
+			&balance,
+			&pendingBalance,
+		)
 
 		if err != nil {
 			writeJSON(w, http.StatusNotFound, map[string]interface{}{
@@ -58,8 +66,9 @@ func Wallet(db *pgxpool.Pool) http.HandlerFunc {
 			"success": true,
 			"message": "Wallet retrieved successfully.",
 			"data": map[string]interface{}{
-				"id":      walletID,
-				"balance": balance,
+				"id":              walletID,
+				"balance":         balance,
+				"pending_balance": pendingBalance,
 			},
 		})
 	}

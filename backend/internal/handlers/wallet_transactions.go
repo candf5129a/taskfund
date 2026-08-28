@@ -41,6 +41,7 @@ func WalletTransactions(db *pgxpool.Pool) http.HandlerFunc {
 				description,
 				task_id,
 				submission_id,
+				withdrawal_id,
 				created_at
 			FROM transactions
 			WHERE user_id = $1
@@ -70,6 +71,7 @@ func WalletTransactions(db *pgxpool.Pool) http.HandlerFunc {
 				description     *string
 				taskID          *int64
 				submissionID    *int64
+				withdrawalID    *int64
 				createdAt       interface{}
 			)
 
@@ -80,6 +82,7 @@ func WalletTransactions(db *pgxpool.Pool) http.HandlerFunc {
 				&description,
 				&taskID,
 				&submissionID,
+				&withdrawalID,
 				&createdAt,
 			)
 
@@ -98,6 +101,7 @@ func WalletTransactions(db *pgxpool.Pool) http.HandlerFunc {
 				"description":   description,
 				"task_id":       taskID,
 				"submission_id": submissionID,
+				"withdrawal_id": withdrawalID,
 				"created_at":    createdAt,
 			})
 		}

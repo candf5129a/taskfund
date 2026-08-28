@@ -77,15 +77,14 @@ func main() {
 
 	mux.Handle(
 		"/api/v1/admin/submissions/",
-		middleware.Auth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
+		middleware.Auth(middleware.Admin(db, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			if strings.HasSuffix(r.URL.Path, "/approve") {
 				handlers.ApproveSubmission(db).ServeHTTP(w, r)
 				return
 			}
 
 			http.NotFound(w, r)
-		})),
+		}))),
 	)
 
 	mux.Handle(
@@ -95,8 +94,9 @@ func main() {
 
 	mux.Handle(
 		"/api/v1/admin/submissions",
-		middleware.Auth(handlers.AdminSubmissions(db)),
-	)
+		middleware.Auth(
+			middleware.Admin(db, handlers.AdminSubmissions(db)),
+		))
 
 	mux.Handle(
 		"/api/v1/wallet",
@@ -107,10 +107,31 @@ func main() {
 		"/api/v1/wallet/transactions",
 		middleware.Auth(handlers.WalletTransactions(db)),
 	)
+	
+	mux.Handle(
+		"/api/v1/withdrawals",
+		middleware.Auth(handlers.CreateWithdrawal(db)),
+	)
+
+	mux.Handle(
+		"/api/v1/admin/withdrawals",
+		middleware.Auth(
+			middleware.Admin(db, handlers.AdminWithdrawals(db)),
+		),
+	)
+
+	mux.Handle(
+		"/api/v1/admin/withdrawals/",
+		middleware.Auth(
+			middleware.Admin(db, handlers.AdminReviewWithdrawal(db)),
+		),
+	)
+
 	// server := &http.Server{
 	// 	Addr:    ":8080",
 	// 	Handler: mux,
 	// }
+
 	server := &http.Server{
 		Addr:    ":8080",
 		Handler: middleware.CORS(mux),

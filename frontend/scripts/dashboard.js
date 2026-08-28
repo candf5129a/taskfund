@@ -1,6 +1,5 @@
 const token = localStorage.getItem("access_token");
 
-
 // No token = not logged in
 if (!token) {
     window.location.href = "login.html";
@@ -23,9 +22,7 @@ async function loadProfile() {
             }
         );
 
-
         const result = await response.json();
-
 
         if (!response.ok || !result.success) {
 
@@ -37,25 +34,60 @@ async function loadProfile() {
             return;
         }
 
-
         const user = result.data;
-
 
         document.getElementById("user-name").textContent =
             `${user.first_name} ${user.last_name}`;
 
-
         document.getElementById("user-email").textContent =
             user.email;
 
-
     } catch (error) {
 
-        console.error("Dashboard error:", error);
+        console.error("Profile error:", error);
 
         document.getElementById("dashboard-message").textContent =
             "Unable to connect to TaskFunds server.";
+    }
+}
 
+
+// Load wallet
+async function loadWallet() {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/v1/wallet",
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || "Failed to load wallet.");
+        }
+
+        const wallet = result.data;
+
+        document.getElementById("wallet-balance").textContent =
+            `₦${Number(wallet.balance).toFixed(2)}`;
+
+    } catch (error) {
+
+        console.error("Wallet error:", error);
+
+        document.getElementById("wallet-balance").textContent =
+            "₦0.00";
+
+        document.getElementById("dashboard-message").textContent =
+            "Unable to load wallet.";
     }
 }
 
@@ -72,4 +104,6 @@ document
     });
 
 
+// Load dashboard data
 loadProfile();
+loadWallet();

@@ -70,16 +70,16 @@ func ApproveSubmission(db *pgxpool.Pool) http.HandlerFunc {
 		err = tx.QueryRow(
 			ctx,
 			`
-			SELECT
-				ts.task_id,
-				ts.worker_id,
-				t.reward
-			FROM task_submissions ts
-			JOIN tasks t ON t.id = ts.task_id
-			WHERE ts.id = $1
-			  AND ts.status = 'pending'
-			FOR UPDATE OF ts
-			`,
+    SELECT
+        ts.task_id,
+        ts.worker_id,
+        t.reward
+    FROM task_submissions ts
+    JOIN tasks t ON t.id = ts.task_id
+    WHERE ts.id = $1
+      AND ts.status = 'pending'
+    FOR UPDATE OF ts
+    `,
 			submissionID,
 		).Scan(
 			&taskID,
@@ -88,9 +88,46 @@ func ApproveSubmission(db *pgxpool.Pool) http.HandlerFunc {
 		)
 
 		if err == pgx.ErrNoRows {
-			writeJSON(w, http.StatusNotFound, map[string]interface{}{
+
+			var currentStatus string
+
+			statusErr := tx.QueryRow(
+				ctx,
+				`
+        SELECT status
+        FROM task_submissions
+        WHERE id = $1
+        `,
+				submissionID,
+			).Scan(&currentStatus)
+
+			if statusErr == pgx.ErrNoRows {
+				writeJSON(w, http.StatusNotFound, map[string]interface{}{
+					"success": false,
+					"message": "Submission not found.",
+				})
+				return
+			}
+
+			if statusErr != nil {
+				writeJSON(w, http.StatusInternalServerError, map[string]interface{}{
+					"success": false,
+					"message": "Failed to retrieve submission status.",
+				})
+				return
+			}
+
+			if currentStatus == "approved" {
+				writeJSON(w, http.StatusConflict, map[string]interface{}{
+					"success": false,
+					"message": "Submission has already been approved and paid.",
+				})
+				return
+			}
+
+			writeJSON(w, http.StatusConflict, map[string]interface{}{
 				"success": false,
-				"message": "Pending submission not found.",
+				"message": "Submission cannot be approved in its current state.",
 			})
 			return
 		}
